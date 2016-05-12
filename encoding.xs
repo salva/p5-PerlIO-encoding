@@ -4,6 +4,9 @@
 #include "XSUB.h"
 #define U8 U8
 
+#define NEED_mg_findext
+#include "ppport.h"
+
 #define OUR_DEFAULT_FB	"Encode::PERLQQ"
 
 #if defined(USE_PERLIO)
