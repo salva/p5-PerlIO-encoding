@@ -5,8 +5,5 @@ blib
 *.c
 *.o
 pm_to_blib
-lib
-t
-encoding.xs
 MANIFEST
 MANIFEST.bak
