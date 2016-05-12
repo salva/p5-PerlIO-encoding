@@ -9,9 +9,26 @@ perl:
   - "5.12"
   - "5.10"
   - "5.8"
+  - "dev"
+  - "blead"
+  - "5.24-thr"
+  - "5.22-thr"
+  - "5.20-thr"
+  - "5.18-thr"
+  - "5.16-thr"
+  - "5.14-thr"
+  - "5.12-thr"
+  - "5.10-thr"
+  - "dev-thr"
+  - "blead-thr"
 
 install:
   - true
 
 script:
   - perl Makefile.PL && make && make test
+
+sudo: false
+
+before_install:
+  - eval $(curl https://travis-perl.github.io/init) --auto
