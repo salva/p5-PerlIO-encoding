@@ -13,7 +13,7 @@ BEGIN {
 	print "1..0 # Skip: EBCDIC\n";
 	exit 0;
     }
-    require "../../t/charset_tools.pl";
+    require "t/charset_tools.pl";
 }
 
 use Test::More tests => 24;
