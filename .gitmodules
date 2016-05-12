@@ -1,0 +1,4 @@
+[submodule "perl"]
+	path = perl
+	url = git://perl5.git.perl.org/perl.git
+	branch = blead
