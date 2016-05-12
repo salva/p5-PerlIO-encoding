@@ -128,7 +128,8 @@ if (ord('A') == 193) { # EBCDIC
 # Check that PerlIO::encoding can handle custom encodings that do funny
 # things with the buffer.
 use Encode::Encoding;
-package Extensive {
+{
+ package Extensive;
  @ISA = Encode::Encoding;
  __PACKAGE__->Define('extensive');
  sub encode($$;$) {
@@ -147,8 +148,10 @@ package Extensive {
  }
  no warnings 'once'; 
  *decode = *encode;
+ package main;
 }
 open my $fh, ">:encoding(extensive)", \$buf;
+require IO::File;
 $fh->autoflush;
 print $fh "doughnut\n";
 print $fh "quaffee\n";
@@ -162,7 +165,8 @@ open $fh, "<:encoding(extensive)", \$buf;
 is join("", <$fh>), "Sheila surely shod Sean\nin shoddy shoes.\n",
    'buffer realloc during decoding';
 
-package Cower {
+{
+ package Cower;
  @ISA = Encode::Encoding;
  __PACKAGE__->Define('cower');
  sub encode($$;$) {
@@ -180,6 +184,7 @@ package Cower {
  }
  no warnings 'once'; 
  *decode = *encode;
+ package main;
 }
 open $fh, ">:encoding(cower)", \$buf;
 $fh->autoflush;
@@ -191,7 +196,8 @@ open $fh, "<:encoding(cower)", \$buf;
 is join("", <$fh>), "pumping\nplum\npits\n",
   'cowing buffer during decoding';
 
-package Globber {
+{
+ package Globber;
  no warnings 'once';
  @ISA = Encode::Encoding;
  __PACKAGE__->Define('globber');
@@ -201,6 +207,7 @@ package Globber {
   $buf;
  }
  *decode = *encode;
+ package main;
 }
 
 # Here we just want to test there is no crash.  The actual output is not so
@@ -212,8 +219,9 @@ package Globber {
 require Config;
 SKIP: {
 skip "produces string table warnings", 2
-  if "@{[Config::non_bincompat_options()]}" =~ /\bDEBUGGING\b/
-   && $ENV{PERL_DESTRUCT_LEVEL};
+  if $] < 5.014
+    || ("@{[Config::non_bincompat_options()]}" =~ /\bDEBUGGING\b/
+        && $ENV{PERL_DESTRUCT_LEVEL});
 
 eval { eval {
     open my $fh, ">:encoding(globber)", \$buf;
