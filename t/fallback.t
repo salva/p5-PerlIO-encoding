@@ -46,7 +46,7 @@ print $fh $str,"0.02\n";
 close($fh);
 
 open($fh,$file) || die "File cannot be re-opened";
-my $line = <$fh>;
+$line = <$fh>;
 is($line,"&#8364;0.02\n","HTML escapes");
 close($fh);
 
@@ -59,7 +59,7 @@ close($fh);
 }
 
 ok(open($fh,"<encoding(US-ASCII)",$file),"Opened as ASCII");
-my $line = <$fh>;
+$line = <$fh>;
 printf "# %x\n",ord($line);
 is($line,"\\xA30.02\n","Escaped non-mapped char");
 close($fh);
@@ -67,7 +67,7 @@ close($fh);
 $PerlIO::encoding::fallback = Encode::WARN_ON_ERROR;
 
 ok(open($fh,"<encoding(US-ASCII)",$file),"Opened as ASCII");
-my $line = <$fh>;
+$line = <$fh>;
 printf "# %x\n",ord($line);
 is($line,"\x{FFFD}0.02\n","Unicode replacement char");
 close($fh);
