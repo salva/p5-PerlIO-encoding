@@ -37,6 +37,10 @@
 
 #include "perliol.h"
 
+#if !defined(PerlIO_save_errno)
+#define Perl_PerlIO_save_errno
+#endif
+
 typedef struct {
     PerlIOBuf base;		/* PerlIOBuf stuff */
     SV *bufsv;			/* buffer seen by layers above */
