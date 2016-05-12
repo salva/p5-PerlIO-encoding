@@ -1,0 +1,11 @@
+^slurp.pl$
+^Makefile$
+^MANIFEST\.SKIP$
+^\.git
+^perl
+^blib
+^pm_to_blib
+\.bak$
+\.c$
+\.o$
+~$
