@@ -21,7 +21,7 @@ sys "cp $from/encoding.xs .";
 sys "mkdir -p t";
 sys "cp $from/t/* t";
 sys "cp $from/../../t/charset_tools.pl t";
-sys "sed -s 's/..\\/..\\/t\\/charset_tools.pl/t\\/charset_tools.pl/' -i t/*.t";
+# sys "sed -s 's/..\\/..\\/t\\/charset_tools.pl/t\\/charset_tools.pl/' -i t/*.t";
 
 
 
